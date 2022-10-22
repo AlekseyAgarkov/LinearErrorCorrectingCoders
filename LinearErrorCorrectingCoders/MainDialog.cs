@@ -9,8 +9,12 @@
 // -----------------------------------------------------------------------------
 namespace LinearErrorCorrectingCoders {
     using System.Globalization;
+    using System.Reflection.Emit;
+    using System.Runtime.InteropServices;
     using System.Text;
     using Terminal.Gui;
+    using static System.Net.Mime.MediaTypeNames;
+    using Label = Terminal.Gui.Label;
 
     public enum CodersVariants
     {
@@ -52,11 +56,104 @@ namespace LinearErrorCorrectingCoders {
 
             UpdateLocalization();
 
+            this.comboboxCoders.Expand();
+            //this.SelectedItem(
+
             this.comboboxCoders.HideDropdownListOnClick = true;
             this.comboboxCoders.SelectedItem = 0;
+            this.comboboxCoders.Collapse();
             this.comboboxCoders.SelectedItemChanged += ComboboxCoders_SelectedItemChanged;
             this.buttonRefreshCode.Clicked += () => buttonRefreshCode_Click();
             this.buttonRefreshSyndrome.Clicked += ButtonRefreshSyndrome_Clicked;
+
+            this.textCode.KeyUp += TextCode_KeyUp;
+            this.textCode.MouseClick += TextCode_MouseClick;
+            this.textCode.Leave += TextCode_Leave;
+
+            this.textData.KeyUp += TextData_KeyUp;
+            this.textData.MouseClick += TextData_MouseClick;
+            this.textData.Leave += TextData_Leave;
+
+            this.textSyndrome.KeyUp += TextSyndrome_KeyUp;
+            this.textSyndrome.MouseClick += TextSyndrome_MouseClick;
+            this.textSyndrome.Leave += TextSyndrome_Leave;
+        }
+
+        private void TextCode_Leave(FocusEventArgs obj)
+        {
+            RepairLabelText(this.labelCode, strings.Code_);
+        }
+
+        private void RepairLabelText(Label label, string text)
+        {
+            string prevString = label.Text.ToString().TrimEnd();
+            label.Text = text.PadRight(prevString.Length);
+        }
+
+        private void TextSyndrome_Leave(FocusEventArgs obj)
+        {
+            RepairLabelText(this.labelSyndrome, strings.Syndrome_);
+        }
+
+        private void TextSyndrome_MouseClick(MouseEventArgs obj)
+        {
+            UpdateCursorPositionText(this.labelSyndrome, this.textSyndrome);
+        }
+
+        private void TextSyndrome_KeyUp(KeyEventEventArgs obj)
+        {
+            UpdateCursorPositionText(this.labelSyndrome, this.textSyndrome);
+        }
+
+        private void TextData_Leave(FocusEventArgs obj)
+        {
+            RepairLabelText(this.labelData, strings.Data_);
+        }
+
+        private void TextData_MouseClick(MouseEventArgs obj)
+        {
+            UpdateCursorPositionText(this.labelData, this.textData);
+        }
+
+        private void TextData_KeyUp(KeyEventEventArgs obj)
+        {
+            UpdateCursorPositionText(this.labelData, this.textData);
+        }
+
+        private void TextCode_MouseClick(MouseEventArgs obj)
+        {
+            UpdateCursorPositionText(this.labelCode, this.textCode);
+        }
+
+        private void UpdateCursorPositionText(Label label, TextField textField)
+        {
+            if (textField == null)
+                return;
+
+            if (!textField.HasFocus)
+                return;
+
+            if (label == null)
+                return;
+
+            int Width = 0;
+            if (!this.GetCurrentWidth(out Width))
+            {
+                return;
+            }
+
+            string text = "";
+            int leftSpace = Math.Max(textField.CursorPosition, 0);
+            text = text.PadLeft(leftSpace);
+            text = text + "." + (textField.CursorPosition + 1).ToString();
+            int rightSpace = Math.Max(Width - text.Length, 0);
+            text = text.PadRight(rightSpace + Width);
+            label.Text = text;
+        }
+
+        private void TextCode_KeyUp(KeyEventEventArgs obj)
+        {
+            UpdateCursorPositionText(this.labelCode, this.textCode);
         }
 
         private void UpdateLocalization()
