@@ -55,6 +55,8 @@
                     DataBitsCount++;
                 }
             }
+
+            CheckMatrix = CheckMatrix.Transpose();
         }
 
         protected static bool IsCheckBit(int bitnNo)

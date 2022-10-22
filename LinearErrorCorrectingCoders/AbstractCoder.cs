@@ -44,7 +44,7 @@
             if (TotalLength != code.GetColumns())
                 throw new ArgumentException("TotalLength != code.GetColumns()");
 
-            return code * CheckMatrix.Transpose();
+            return code * CheckMatrix;
         }
 
         public int GetDataLength()

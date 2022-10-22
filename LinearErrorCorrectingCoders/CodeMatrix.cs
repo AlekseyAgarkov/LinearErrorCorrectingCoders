@@ -323,6 +323,12 @@ namespace LinearErrorCorrectingCoders
             ColumnsData.Add(columnData);
         }
 
+        public void AppendRow()
+        {
+            BitArray rowData = new BitArray(Cols);
+            AppendRow(rowData);
+        }
+
         /// <summary>
         /// Append all Columns from passed matrix to this matrix
         /// </summary>

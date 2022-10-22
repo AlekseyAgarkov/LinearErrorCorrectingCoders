@@ -14,6 +14,7 @@
 
             CheckMatrix = new CodeMatrix(CheckLength, TotalLength);
             CheckMatrix.Fill(true);
+            CheckMatrix = CheckMatrix.Transpose();
         }
     }
 }

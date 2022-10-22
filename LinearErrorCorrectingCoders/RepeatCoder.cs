@@ -40,11 +40,18 @@
                         tmpMatrix.SetAt(r, c, false);
                     }
                 }
+                //if (CheckMatrix == null)
+                //    CheckMatrix = new CodeMatrix(tmpMatrix);
+                //else
+                //    CheckMatrix.AppendAllRows(tmpMatrix);
+
                 if (CheckMatrix == null)
                     CheckMatrix = new CodeMatrix(tmpMatrix);
                 else
                     CheckMatrix.AppendAllRows(tmpMatrix);
             }
+
+            CheckMatrix = CheckMatrix.Transpose();
         }
     }
 }

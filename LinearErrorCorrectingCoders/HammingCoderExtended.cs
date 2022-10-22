@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LinearErrorCorrectingCoders
+﻿namespace LinearErrorCorrectingCoders
 {
     public class HammingCoderExtended : HammingCoder
     {
@@ -20,8 +14,13 @@ namespace LinearErrorCorrectingCoders
             tmpMatrix = new CodeMatrix(1, TotalLength);
             tmpMatrix.Fill(true);
 
-            CheckMatrix.AppendColumn();
-            CheckMatrix.AppendRow(tmpMatrix.GetRow(0));
+            
+
+            //CheckMatrix.AppendColumn();
+            //CheckMatrix.AppendRow(tmpMatrix.GetRow(0));
+            CheckMatrix.AppendRow();
+            CheckMatrix.AppendColumn(tmpMatrix.GetRow(0));
+            
         }
     }
 }

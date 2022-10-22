@@ -294,10 +294,10 @@ namespace LinearErrorCorrectingCoders {
                 stringBuilderMatrix.Append("G:\n");
                 stringBuilderMatrix.Append(CurrentCoder.GetGeneratorMatrix().ToString());
                 stringBuilderMatrix.Append("\nH:\n");
-                stringBuilderMatrix.Append(CurrentCoder.GetCheckMatrix().ToString());
-                stringBuilderMatrix.Append("\nH^T:\n");
                 stringBuilderMatrix.Append(CurrentCoder.GetCheckMatrix().Transpose().ToString());
-
+                stringBuilderMatrix.Append("\nH^T:\n");
+                stringBuilderMatrix.Append(CurrentCoder.GetCheckMatrix().ToString());
+                
                 this.textviewMatrix.Text = stringBuilderMatrix.ToString();
             }
         }
@@ -346,9 +346,8 @@ namespace LinearErrorCorrectingCoders {
 
             string codeData = this.textData.Text.ToString();
             codeData = ReplaceNotBinChars(codeData);
-
             return CurrentCodeString.Length != codeData.Length 
-                || CurrentRepeat != this.textRepeat.ToString() 
+                || CurrentRepeat != this.textRepeat.Text.ToString() 
                 || CodersList[comboboxCoders.SelectedItem].Variant != CurrentCoderVariant;
         }
 

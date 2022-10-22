@@ -12,6 +12,7 @@
             GeneratorMatrix.AppendAllColumns(rightPart);
 
             CheckMatrix = GeneratorMatrix.Inverse();
+            CheckMatrix = CheckMatrix.Transpose();
         }
     }
 }
