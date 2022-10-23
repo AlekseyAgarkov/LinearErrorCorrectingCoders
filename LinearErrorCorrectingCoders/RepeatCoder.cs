@@ -14,8 +14,6 @@
 
             GeneratorMatrix = new CodeMatrix(DataLength, true);
 
-            string s3 = GeneratorMatrix.ToString();
-
             int repeat = repeatCount;
             for (int n = 1; n < repeat; n++)
             {
@@ -40,10 +38,6 @@
                         tmpMatrix.SetAt(r, c, false);
                     }
                 }
-                //if (CheckMatrix == null)
-                //    CheckMatrix = new CodeMatrix(tmpMatrix);
-                //else
-                //    CheckMatrix.AppendAllRows(tmpMatrix);
 
                 if (CheckMatrix == null)
                     CheckMatrix = new CodeMatrix(tmpMatrix);
